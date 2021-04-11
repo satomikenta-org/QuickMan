@@ -15,7 +15,7 @@ export const initialState = {
   url: "",
   method: "" as HttpMethod,
   headers: {},
-  body: null,
+  body: {} as Body,
   response: "",
   statusCode: 0,
   responseCookie: "",

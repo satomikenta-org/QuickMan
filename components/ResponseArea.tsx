@@ -1,6 +1,7 @@
 import { Card, Divider, Flex, Stack, Button, Select } from 'bumbag';
 import { Markdown } from 'bumbag-addon-markdown';
 import { useRef, useState } from 'react';
+const { CopyToClipboard } = require('react-copy-to-clipboard');
 import { useHttpReqCtx } from '../hooks/useHttpRequestCtx';
 import { generate, TargetLanguage } from '../lib/typegen';
 
@@ -52,17 +53,16 @@ export const ResponseArea: React.FC = () => {
             >Cookie: <span>{ state.responseCookie.slice(0, 20) + "..." }</span>
             </div>
             <button style={{ 
-                width: '60px',
+                width: '100px',
                 cursor: 'pointer', 
-                backgroundColor: '#574feb', 
-                borderRadius: "4px", 
-                height: '25px',
-                fontSize: ".9rem", 
-                fontWeight: "bold", 
+                borderRadius: "45px", 
+                height: '25px', 
                 marginTop: "-10px", 
                 marginBottom: '10px' 
             }}>
-              <span style={{ color: 'white', fontSize: '.88rem' }}>copy</span>
+              <CopyToClipboard text={state.responseCookie}>
+                <span style={{  fontSize: '.88rem' }}>copy cookie</span>
+              </CopyToClipboard>
             </button>
           </>
           )

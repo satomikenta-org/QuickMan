@@ -27,11 +27,11 @@ export class Body {
 };
 
 export class HttpClient {
-  private axios: AxiosInstance;
-  private method: HttpMethod;
-  private url: string;
-  private body: Object = {};
-  private response: AxiosResponse = {} as AxiosResponse;
+  public axios: AxiosInstance;
+  public method: HttpMethod;
+  public url: string;
+  public body: Object = {};
+  public response: AxiosResponse = {} as AxiosResponse;
   public statusCode: number = 0;
   public responseCookie: string = "";
 
@@ -51,14 +51,4 @@ export class HttpClient {
     }
   }
 
-  async request(): Promise<void> {
-    const res = await this.axios[this.method](this.url, this.body);
-    this.response = res;
-    this.statusCode = res.status;
-    this.responseCookie = res.headers['cookie'] || res.headers['Cookie'];
-  }
-
-  outputResponse(): string {
-    return JSON.stringify(this.response?.data);
-  }
 }

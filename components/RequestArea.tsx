@@ -2,6 +2,7 @@ import { InputField, Select, Button, Stack, useToasts } from 'bumbag';
 import { useEffect, useState } from 'react';
 import { useHttpReqCtx } from '../hooks/useHttpRequestCtx';
 import { HttpClient, HttpMethod } from '../lib/http';
+import axios from 'axios';
 
 export const RequestArea: React.FC = () => {
   const toasts = useToasts();
@@ -25,12 +26,11 @@ export const RequestArea: React.FC = () => {
     if (!url) return;
     try {
       const client = new HttpClient(url, method, headers, body);
-      await client.request();
+      const { data } = await axios.post('/api/http', client);
       dispatch({ 
         type: "SET_RESPONSE", 
-        payload: { ...state, response: client.outputResponse(), statusCode: client.statusCode!, responseCookie: client.responseCookie }
+        payload: { ...state, response: JSON.stringify(data.response), statusCode: data.status, responseCookie: data.responseCookie }
       });
-      toasts.success({title: "Success"});
     } catch (ex) {
       toasts.danger({title: "Error", message: ex.message});
     }

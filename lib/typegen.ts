@@ -20,11 +20,11 @@ async function quicktypeJSON(targetLanguage: TargetLanguage, jsonString: string)
   inputData.addInput(jsonInput);
 
   const option = targetLanguage == 'ts' ? { 'just-types': 'true' } : undefined;
-
+  const indent = targetLanguage == 'ts' ? "&nbsp;&nbsp;": "&nbsp;&nbsp;&nbsp;&nbsp;";
   return await quicktype({
     inputData,
     lang: targetLanguage,
-    indentation: "&nbsp; &nbsp; &nbsp; &nbsp;",
+    indentation: indent,
     rendererOptions: option,
   });
 }
