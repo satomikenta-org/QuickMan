@@ -4,6 +4,7 @@ import axios from 'axios';
 export default async function(req: NextApiRequest, res: NextApiResponse) {
   const { url, method, headers, body } = req.body;
   try {
+    /* @ts-ignore */
     const response = await axios[method](url, headers || {}, body || {});
     return res.json({ 
       response: response.data, 
